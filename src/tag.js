@@ -1,0 +1,124 @@
+import {useState, useEffect} from 'react'
+import axios from "axios"
+import {Post} from "./post"
+import { Link, Route, Routes, useParams, useLocation, Params } from 'react-router-dom'
+import Home from './home'
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Row, Col, Container } from 'react-bootstrap';
+import {ResponsiveEmbed, Image} from 'react-bootstrap';
+
+
+const Tag = () => {
+
+    useEffect(() => {
+        getData()
+      }, [])
+      const {id} = useParams();
+      const [data, setData] = useState(null)
+      const [data2, setData2] = useState(null)
+      const [loading, setLoading] = useState(true)
+      const [error, setError] = useState(null)
+    
+     
+    
+      async function getData() {
+
+        await axios('https://fswd-wp.devnss.com/wp-json/wp/v2/posts')
+    .then((response) => {setData2(response.data)})
+    .catch((error) => {console.error("Error fetching data:", error)
+  setError(error)})
+  .finally(() => {setLoading(false);})
+
+    await axios('https://fswd-wp.devnss.com/wp-json/wp/v2/tags')
+    .then((response) => {setData(response.data)})
+    .catch((error) => {console.error("Error fetching data:", error)
+  setError(error)})
+  .finally(() => {setLoading(false);})
+
+
+    
+    
+    
+      }
+
+
+      if (loading) {
+        return (
+          <Container> <h1><div>Loading...</div></h1></Container>
+        )
+      }
+      if (error) {
+        return (
+          <Container> <h1><div>Error: {error.message}</div></h1></Container>
+        )
+      }
+      if(data2 == null || data == null){
+          
+      return (
+        <Container><div><h1>LOADING...</h1></div></Container>
+      )
+    }
+    
+      
+    if(data2 && data){
+    
+    console.log(id)
+    console.log(data2[0].tags[0].toString())
+
+    return(
+        <>
+
+
+
+        {data.filter(tag => tag.id.toString() === id).map((tag, index) => 
+    (
+      <Container key={index} className="Tag">
+      <div>
+          <h1>Tag: {tag.name}</h1>
+          <h2>Count: {tag.count}</h2>
+          <h3>Tag ID: {tag.id}</h3>
+          
+
+      </div>
+      </Container>
+    ))
+    }
+    
+
+    {data2.filter(posts => posts.tags.includes(Number(id))).map((posts ,index) => (
+        
+        <Container key={index}>
+        <div style={{backgroundColor: "#85CCF1 ", margin: 60, padding: 30, borderRadius:8}}>
+            
+            <h1>ID: {posts.id}</h1>
+            <h2>Title: {posts.title.rendered}</h2>
+            <div>
+            <h5>
+            Tags: 
+      {posts.tags.map((tag, index) => (
+        <span key={tag}> {tag} </span>
+      ))}</h5>
+              
+          <Link to={`/Content/${posts.id}`}><Button variant="secondary">More Info</Button></Link>
+          </div>
+          </div>
+          </Container>
+        
+    ))
+      }
+      
+      </>
+    )
+      
+    
+      
+
+
+
+
+
+}
+}
+
+export default Tag;

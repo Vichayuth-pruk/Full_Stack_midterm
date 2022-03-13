@@ -118,7 +118,7 @@ function App() {
       <Route path='/Category/:id' element={<Category/>}/>
       <Route path='/Content/:id' element={<Content/>}/>
       <Route path='404' element={<NoFind/>} exact/>
-      <Route path='*' element={<Navigate to='404'/>}/>
+      <Route path='/*' element={<Navigate to='404'/>}/>
       </Routes>
       
 

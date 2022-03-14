@@ -21,7 +21,7 @@ export const Post = ({id, title, tag}) => {
         <h2>Title: {title}</h2>
         <div>
           <h5>
-            Tags: 
+            Tags ID: 
       {tag.map((tag, index) => (
         <span key={tag}> {tag} </span>
       ))}</h5>

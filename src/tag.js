@@ -95,7 +95,7 @@ const Tag = () => {
             <h2>Title: {posts.title.rendered}</h2>
             <div>
             <h5>
-            Tags: 
+            Tags ID: 
       {posts.tags.map((tag, index) => (
         <span key={tag}> {tag} </span>
       ))}</h5>

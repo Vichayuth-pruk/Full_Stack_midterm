@@ -95,7 +95,7 @@ const Tag = () => {
             <h2>Title: {posts.title.rendered}</h2>
             <div>
             <h5>
-            Category: 
+            Category ID: 
       {posts.categories.map((category, index) => (
         <span key={category}> {category} </span>
       ))}</h5>

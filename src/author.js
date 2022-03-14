@@ -54,6 +54,9 @@ const Author = () => {
     if(data){
         return(
             <>
+            <Container>
+            <h2>Author</h2>
+            
             
 
             {data.map((author, index) => (
@@ -74,6 +77,7 @@ const Author = () => {
 
 
             ))}
+            </Container>
 
     
         </>

@@ -65,11 +65,7 @@ const Author = () => {
                     <Image src={author.avatar_urls["96"]} responsive="true" roundedCircle />
                         <h1>Author ID: {author.id}</h1>
                         <h2>Author Name: {author.name}</h2>
-                        
                     </div>
-
-
-
                 </Container>
 
 

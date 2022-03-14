@@ -86,15 +86,15 @@ function App() {
 
 <Navbar bg="light" expand="lg">
   <Container>
-    <Navbar.Brand as={Link} to="/">CMS-MK1</Navbar.Brand>
+    <Navbar.Brand  href="/">CMS-MK1</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
-      <Nav.Link as={Link} to="/">Home</Nav.Link>
-        <Nav.Link as={Link} to="/Author">Author</Nav.Link>
+      <Nav.Link  href="/">Home</Nav.Link>
+        <Nav.Link  href="/Author">Author</Nav.Link>
         <NavDropdown title="Tag" id="basic-nav-dropdown">
         {data.map((tag, index) => (
-        <NavDropdown.Item as={Link} key={index} to={`/Tag/${tag.id}`}>{tag.name}</NavDropdown.Item>
+        <NavDropdown.Item  key={index} href={`/Tag/${tag.id}`}>{tag.name}</NavDropdown.Item>
         
       ))}
 
@@ -102,7 +102,7 @@ function App() {
 
         <NavDropdown title="Category" id="basic-nav-dropdown">
         {data2.map((category, index) => (
-        <NavDropdown.Item as={Link} key={index} to={`/Category/${category.id}`}>{category.name}</NavDropdown.Item>
+        <NavDropdown.Item key={index} href={`/Category/${category.id}`}>{category.name}</NavDropdown.Item>
         
       ))}
       </NavDropdown>

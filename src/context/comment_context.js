@@ -1,5 +1,5 @@
 import { createContext, useCallback, useMemo, useContext, useState, useEffect } from "react";
-import axios from "axios"
+import axios, { Axios } from "axios"
 
 export const CommentContext = createContext();
 
@@ -11,7 +11,6 @@ export const CommentProvider = ({ children }) => {
         getData()
       }, [])
   const [comment, setComment] = useState([])
-  const [guest_comment, setGuest_comment] = useState([])
 
 async function getData() {
 
@@ -21,35 +20,61 @@ async function getData() {
 }
 
   
+  
+
+
+
+
+  
+
 
   const addComment = useCallback(
       
-      (comment) => {
-          console.log(comment)
-          var count = 1
-         const new_comment = {
-              "id": count,
-              "posts_id": comment.posts_id,
-              "name": "guest",
-              "detail": comment.detail
+    (comment) => {
 
-          }
-          count += 1
+        let body = {
 
-        setGuest_comment((prev) => [...prev, new_comment])
-      },
-      [],
-  )
+          post: comment.posts_id,
+          parent: 0,
+          author_name: "Guest",
+          author_url: "",
+          date: new Date().toISOString(),
+          date_gmt: new Date().toISOString(),
+          content: comment.detail,
+          link: "",
+          type: "comment",
+          meta: [],
+      };
+      axios.post("https://fswd-wp.devnss.com/wp-json/wp/v2/comments", body, {
+        headers: {
+          Authorization: "Basic ZnN3ZDpmc3dkLWNtcw=="
+        },
+      })
+      .then((res) => {
+        console.log(res)
+        window.location.reload(false)
+        
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+     
+
+      
+    },
+    
+    [],
+)
+  
 
   
  
   const value = useMemo(
     () => ({
-        guest_comment,
       comment,
       addComment,
     }),
-    [comment, addComment, guest_comment]
+    [comment, addComment]
   );
   return <CommentContext.Provider value={value}>{children}</CommentContext.Provider>;
 };

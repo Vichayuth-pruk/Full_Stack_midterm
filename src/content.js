@@ -39,11 +39,20 @@ const Content = () => {
       textInput.current.value = ""
     }
     else{
-      addComment({"posts_id": posts_id,"detail": detail})
+      addComment({
+        "posts_id": posts_id,"detail": detail
+      })
       textInput.current.value = ""
     }
 
   })
+
+
+  
+
+
+
+  
  
 
 
@@ -159,22 +168,6 @@ if(data && data2){
         
       ))}
 
-{guest_comment.filter(comment2 => comment2.posts_id.toString() === card.id.toString()).map((comment2, index) => (
-      <Container key={index}>
-
-<div style={{backgroundColor: "#CF9955 ", margin: 60, padding: 30, borderRadius:8}}>
-        
-        <h2>Author Name: {comment2.name}</h2>
-
-        <h3>Comment:</h3>
-        <h3>{comment2.detail}</h3>
-        </div>
-
-      </Container>
-
-
-        
-      ))}
 
       </div>
 

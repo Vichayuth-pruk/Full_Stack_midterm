@@ -54,6 +54,7 @@ function Home() {
             tag={post.tags}
             title={post.title.rendered}
             name={post.name}
+            date={post.date}
             description={post.Description}
             price={post.price}
             index ={index}

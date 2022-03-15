@@ -86,13 +86,20 @@ const Tag = () => {
     }
     
 
-    {data2.filter(posts => posts.tags.includes(Number(id))).map((posts ,index) => (
+    {data2.filter(posts => posts.tags.includes(Number(id))).map((posts ,index) => {
+    
+    let local_date = new Date(posts.date).toLocaleDateString()
+    let time = new Date(posts.date).toLocaleTimeString()
+    
+    return(
         
         <Container key={index}>
         <div style={{backgroundColor: "#85CCF1 ", margin: 60, padding: 30, borderRadius:8}}>
             
             <h1>ID: {posts.id}</h1>
             <h2>Title: {posts.title.rendered}</h2>
+            <h3>Post Date: {local_date}</h3>
+            <h3>Post Time: {time}</h3>
             <div>
             <h5>
             Tags ID: 
@@ -105,7 +112,7 @@ const Tag = () => {
           </div>
           </Container>
         
-    ))
+    )})
       }
       
       </>

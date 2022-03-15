@@ -13,6 +13,7 @@ import { CommentContext ,useComment } from './context/comment_context'
 
 
 
+
 const Content = () => {
 
   useEffect(() => {
@@ -111,24 +112,35 @@ if(data && data2){
 
   else{
 
+
   
   return(
     
     <>
     <Container>
     <div>
-    {data.filter(card => card.id.toString() === id).map((card, index) => 
-    (
+    {data.filter(card => card.id.toString() === id).map((card, index) => {
+
+      let local_date = new Date(card.date).toLocaleDateString()
+      let time = new Date(card.date).toLocaleTimeString()
+
+    return(
+      
       
       <div key={index} className="Content">
         <h2>Post ID:{card.id}</h2>
 
-        {data2.filter(user => user.id.toString() === card.author.toString()).map((user, index) => (
+        {data2.filter(user => user.id.toString() === card.author.toString()).map((user, index) => ( 
+
+
+          
            <div key={index} className="user">
             <h4>Author: {user.name}</h4>
           </div>
 
         ))}
+        <h3>Date: {local_date}</h3>
+        <h3>Time: {time}</h3>
 
         <h3>Title: {card.title.rendered}</h3>
 
@@ -152,27 +164,35 @@ if(data && data2){
         </Form>
         </Container>
 
-    {comment.filter(comment => comment.post.toString() === card.id.toString()).map((comment, index) => (
+    {comment.filter(comment => comment.post.toString() === card.id.toString()).map((comment, index) => {
+
+    let local_date = new Date(comment.date).toLocaleDateString()
+    let time = new Date(comment.date).toLocaleTimeString()
+    
+    return(
+
       <Container key={index}>
 
 <div style={{backgroundColor: "#CF9955 ", margin: 60, padding: 30, borderRadius:8}}>
         
         <h2>Author Name: {comment.author_name}</h2>
+        <h4>Date: {local_date}</h4>
+        <h4>Time: {time}</h4>
 
-        <h3>Comment:<div dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div></h3>
+        <h3>Comment Detail:<div style={{marginTop: 10}} dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div></h3>
         </div>
 
       </Container>
 
 
         
-      ))}
+      )})}
 
 
       </div>
 
       
-    ))
+    )})
     }
 
 
